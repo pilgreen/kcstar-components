@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<header class="vertical center layout tight">
+  <h1 class="headline slab">{{ site.title }}</h1>
+  <h4 class="sans light gray">{{ site.description }}</h4>
+</header>
+
+<section>
+  <h2 class="sans-cond underline">Graphic Elements</h2>
+  <div class="horizontal wrap layout">
+    {% for item in site.tags.graphics %}
+      <div class="card">
+        <img class="max" src="http://graphics8.nytimes.com/images/2012/03/21/health/21physed_well/21physed_well-blog480.jpg">
+        <h2 class="sans-cond"><a href="{{ item.url | prepend:site.baseurl }}">{{ item.title }}</a></h2>
+        <p>{{ item.excerpt }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
