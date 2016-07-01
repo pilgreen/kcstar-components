@@ -4,6 +4,8 @@ created 2016-01-11
 © Copyright 2016 The Kansas City Star. All Rights Reserved.
 -->
 
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
 <dom-module id="graphic-stack">
   <template>
     <style>
@@ -13,19 +15,19 @@ created 2016-01-11
         font-family: 'McClatchy Sans',Helvetica,Arial,sans-serif !important;
       }
 
-      :host([right]) {
+      :host(.right) {
         float: right;
         width: 50%;
         margin: 0 0 15px 15px;
       }
 
-      :host([left]) {
+      :host(.left) {
         float: left;
         width: 50%;
         margin: 0 15px 15px 0;
       }
 
-      :host ::content [mobile] {
+      :host ::content .mobile {
         display: none;
       }
 
@@ -65,15 +67,14 @@ created 2016-01-11
           margin: 2rem 0 !important;
         }
 
-        :host ::content [desktop] {
+        :host ::content .desktop {
           display: none;
         }
 
-        :host ::content [mobile] {
+        :host ::content .mobile {
           display: block;
         }
       }
-
     </style>
 
     <content></content>

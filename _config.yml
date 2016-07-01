@@ -10,4 +10,3 @@ url: http://pilgreen.github.io
 
 # Build settings
 markdown: kramdown
-exclude: [bower.json, bower_components]

@@ -26,19 +26,25 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
 <button class="generate">generate code</button>
 
-<!-- generated content -->
 <div id="preview" class="clearfix"></div>
-
 <label class="sans-cond">Copy this code</label>
 <textarea id="code" class="nowrap"></textarea>
 
+<!-- Template content -->
+<template>
+  <graphic-stack>
+    <img class="desktop">
+    <img class="mobile">
+    <div class="content"></div>
+  </graphic-stack>
+</template>
+
+<!-- Page script -->
 <script>
-  var f = document.querySelector('form');
   var b = document.querySelector('button');
+  b.addEventListener('click', handleClick);
 
-  b.addEventListener('click', generateHTML);
-
-  function generateHTML() {
+  function handleClick() {
     var v = {
       desktop: document.querySelector('input[name="desktopImage"]').value,
       mobile: document.querySelector('input[name="mobileImage"]').value,
@@ -46,20 +52,38 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
       position: document.querySelector('input[name="position"]:checked').value
     }
 
-    var imageString = v.mobile ? `
-<img desktop src="${v.desktop}">
-<img mobile src="${v.mobile}">
-    ` : `
-<img src="${v.desktop}">
-    `
+    generatePreview(v);
+    generateCode(v);
+  }
 
-    var html = `
-<graphic-stack ${v.position}>
-${imageString.trim()}
-${v.content.trim()}
-</graphic-stack>
-    `
-    document.querySelector('#preview').innerHTML = html;
-    document.querySelector('#code').value = html.trim();
+  function generatePreview(v) {
+    var t = document.querySelector('template');
+    var stack = t.content.querySelector('graphic-stack');
+    var preview = document.querySelector('#preview');
+
+    stack.setAttribute('position', v.position);
+    stack.querySelector('.desktop').src = v.desktop ? v.desktop : '';
+    stack.querySelector('.mobile').src = v.mobile ? v.mobile : '';
+    stack.querySelector('.content').innerHTML = v.content;
+
+    while(preview.firstChild) {
+      preview.removeChild(preview.firstChild);
+    }
+
+    var clone = document.importNode(t.content, true);
+    preview.appendChild(clone);
+  }
+
+  function generateCode(v) {
+    var code = document.querySelector('#code');
+    var imgString = v.mobile ? `<img class="desktop" src="${v.desktop}">\n<img class="mobile" src="${v.mobile}">` : `<img ${v.desktop}>`
+
+    code.value = `
+<link rel="import" href="http://pilgreen.githubio.com/kcstar-webcomponents/components/graphic-stack.html">
+<graphic-stack position="${v.position}">
+  ${imgString.trim()}
+  ${v.content.trim()}
+</graphic-stack>`.trim();
   }
 </script>
+
