@@ -76,10 +76,10 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
   function generateCode(v) {
     var code = document.querySelector('#code');
-    var imgString = v.mobile ? `<img class="desktop" src="${v.desktop}">\n<img class="mobile" src="${v.mobile}">` : `<img ${v.desktop}>`
+    var imgString = v.mobile ? `<img class="desktop" src="${v.desktop}">\n<img class="mobile" src="${v.mobile}">` : `<img src="${v.desktop}">`
 
     code.value = `
-<link rel="import" href="http://pilgreen.github.io/kcstar-webcomponents/components/graphic-stack.html">
+<link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/components/graphic-stack.html">
 <graphic-stack position="${v.position}">
   ${imgString.trim()}
   ${v.content.trim()}
