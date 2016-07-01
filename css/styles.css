@@ -34,6 +34,10 @@ body {
  * Page styles 
  */
 
+.space {
+  margin-bottom: 1rem;
+}
+
 textarea {
   display: block;
   width: 100%;
@@ -52,7 +56,6 @@ label {
 input[type="text"] {
   display: block;
   padding: 0.25rem;
-  margin-bottom: 1rem;
   border: 1px solid #ddd;
   font-size: 19px;
   width: 100%;
@@ -63,6 +66,16 @@ input[type="radio"] {
   width: auto;
   margin-right: 0.5rem;
   vertical-align: top;
+}
+
+textarea {
+  font-size: 15px;
+  font-family: monospace;
+}
+
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .generate {
@@ -83,4 +96,19 @@ input[type="radio"] {
 
 .generate:hover {
   color: #FF5733;
+}
+
+#preview {
+  margin: 1rem 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
 }

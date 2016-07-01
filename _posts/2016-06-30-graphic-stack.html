@@ -8,20 +8,17 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
 <link rel="import" href="components/graphic-stack.html">
 
-<label class="sans-cond">Headline</label>
-<input type="text" name="headline">
-
 <label class="sans-cond">Image URL <small>(Desktop or single)</small></label>
-<input type="text" name="desktopImage">
+<input type="text" class="space" name="desktopImage">
 
 <label class="sans-cond">Image URL <small>(Mobile)</small></label>
-<input type="text" name="mobileImage">
+<input type="text" class="space" name="mobileImage">
 
-<label class="sans-cond">Caption</label>
-<input type="text" name="caption">
+<label class="sans-cond">Content</label>
+<textarea name="content" class="space"></textarea>
 
 <label class="sans-cond">Positioning</label>
-<div class="horizontal layout">
+<div class="horizontal layout space">
   <label><input type="radio" name="position" value="full" checked>full</label>
   <label><input type="radio" name="position" value="left">left</label>
   <label><input type="radio" name="position" value="right">right</label>
@@ -30,8 +27,10 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 <button class="generate">generate code</button>
 
 <!-- generated content -->
-<div id="preview"></div>
-<textarea id="code"></textarea>
+<div id="preview" class="clearfix"></div>
+
+<label class="sans-cond">Copy this code</label>
+<textarea id="code" class="nowrap"></textarea>
 
 <script>
   var f = document.querySelector('form');
@@ -41,28 +40,26 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
   function generateHTML() {
     var v = {
-      headline: document.querySelector('input[name="headline"]').value,
       desktop: document.querySelector('input[name="desktopImage"]').value,
       mobile: document.querySelector('input[name="mobileImage"]').value,
-      caption: document.querySelector('input[name="caption"]').value,
+      content: marked(document.querySelector('textarea[name="content"]').value),
       position: document.querySelector('input[name="position"]:checked').value
     }
 
     var imageString = v.mobile ? `
-    <img desktop src="${v.desktop}">
-    <img mobile src="${v.mobile}">
+<img desktop src="${v.desktop}">
+<img mobile src="${v.mobile}">
     ` : `
-    <img src="${v.desktop}">
+<img src="${v.desktop}">
     `
 
     var html = `
-    <graphic-stack ${v.position}>
-    <h1>${v.headline}</h1>
-    ${imageString.trim()}
-    <p>${v.caption}</p>
-    </graphic-stack>
+<graphic-stack ${v.position}>
+${imageString.trim()}
+${v.content.trim()}
+</graphic-stack>
     `
     document.querySelector('#preview').innerHTML = html;
-    document.querySelector('#code').value = html;
+    document.querySelector('#code').value = html.trim();
   }
 </script>
