@@ -1,0 +1,13 @@
+{
+  "name": "kcstar-webcomponents",
+  "homepage": "https://github.com/pilgreen/kcstar-webcomponents",
+  "authors": [
+    "Jay Pilgreen <jpilgreen@kcstar.com>"
+  ],
+  "description": "KCStar Webcomponents web site",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "^1.6.0"
+  }
+}

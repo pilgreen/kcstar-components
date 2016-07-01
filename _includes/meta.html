@@ -1,3 +1,4 @@
+    <base href="/kcstar-webcomponents/">
     <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     
     <meta charset="UTF-8">
@@ -9,6 +10,9 @@
     <link rel="apple-touch-icon" href="http://media.kansascity.com/images/app-icon.png">
     <link rel="shortcut icon" href="http://media.kansascity.com/images/app-icon.png">
 
-    <link rel="stylesheet" href="{{ '/css/flex-layout.css' | prepend:site.baseurl }}">
-    <link rel="stylesheet" href="{{ '/css/kcstar-project.css' | prepend:site.baseurl }}">
-    <link rel="stylesheet" href="{{ '/css/styles.css' | prepend:site.baseurl }}">
+    <link rel="stylesheet" href="css/flex-layout.css">
+    <link rel="stylesheet" href="css/kcstar-project.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.22/webcomponents-lite.min.js"></script>
+    <link rel="import" href="components/polymer.v.html">

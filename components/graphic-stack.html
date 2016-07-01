@@ -12,10 +12,6 @@ created 2016-01-11
         margin: 2rem 0;
       }
 
-      :host(.tight) {
-        margin: 0 0 10px 0;
-      }
-
       :host([right]) {
         float: right;
         width: 50%;
@@ -37,11 +33,13 @@ created 2016-01-11
       }
 
       :host ::content h1 {
-        font-family: 'McClatchy Slab',Georgia,Times,serif;
+        font-family: 'McClatchy Slab','McClatchySlab',Georgia,Times,serif;
+        font-size: 2rem;
+        margin: 0 0 0.5rem 0;
       }
 
       :host ::content div {
-        margin-bottom: 10px;
+        margin-bottom: 1rem;
       }
 
       :host ::content img {

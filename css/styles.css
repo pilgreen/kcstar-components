@@ -16,6 +16,7 @@ body {
 }
 
 .card {
+  display: block;
   -ms-flex: 0 1 240px;
   -webkit-flex: 0 1 240px;
   flex: 0 1 240px;
@@ -51,6 +52,7 @@ label {
 input[type="text"] {
   display: block;
   padding: 0.25rem;
+  margin-bottom: 1rem;
   border: 1px solid #ddd;
   font-size: 19px;
   width: 100%;

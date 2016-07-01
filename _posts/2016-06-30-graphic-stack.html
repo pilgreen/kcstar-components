@@ -1,0 +1,68 @@
+---
+layout: page
+title: graphic-stack
+permalink: /graphic-stack/
+tags: graphics
+excerpt: The `graphic-stack` element provides structure for a single image in the body of a story.
+---
+
+<link rel="import" href="components/graphic-stack.html">
+
+<label class="sans-cond">Headline</label>
+<input type="text" name="headline">
+
+<label class="sans-cond">Image URL <small>(Desktop or single)</small></label>
+<input type="text" name="desktopImage">
+
+<label class="sans-cond">Image URL <small>(Mobile)</small></label>
+<input type="text" name="mobileImage">
+
+<label class="sans-cond">Caption</label>
+<input type="text" name="caption">
+
+<label class="sans-cond">Positioning</label>
+<div class="horizontal layout">
+  <label><input type="radio" name="position" value="full" checked>full</label>
+  <label><input type="radio" name="position" value="left">left</label>
+  <label><input type="radio" name="position" value="right">right</label>
+</div>
+
+<button class="generate">generate code</button>
+
+<!-- generated content -->
+<div id="preview"></div>
+<textarea id="code"></textarea>
+
+<script>
+  var f = document.querySelector('form');
+  var b = document.querySelector('button');
+
+  b.addEventListener('click', generateHTML);
+
+  function generateHTML() {
+    var v = {
+      headline: document.querySelector('input[name="headline"]').value,
+      desktop: document.querySelector('input[name="desktopImage"]').value,
+      mobile: document.querySelector('input[name="mobileImage"]').value,
+      caption: document.querySelector('input[name="caption"]').value,
+      position: document.querySelector('input[name="position"]:checked').value
+    }
+
+    var imageString = v.mobile ? `
+    <img desktop src="${v.desktop}">
+    <img mobile src="${v.mobile}">
+    ` : `
+    <img src="${v.desktop}">
+    `
+
+    var html = `
+    <graphic-stack ${v.position}>
+    <h1>${v.headline}</h1>
+    ${imageString.trim()}
+    <p>${v.caption}</p>
+    </graphic-stack>
+    `
+    document.querySelector('#preview').innerHTML = html;
+    document.querySelector('#code').value = html;
+  }
+</script>
