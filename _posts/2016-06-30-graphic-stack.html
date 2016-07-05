@@ -14,9 +14,15 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 <label class="sans-cond">Image URL <small>(Mobile)</small></label>
 <input type="text" class="space" name="mobileImage">
 
-<label class="sans-cond">Content</label>
 <div class="horizontal space layout">
-  <textarea name="content" class="flex"></textarea>
+  <div class="flex">
+    <label class="sans-cond">Content</label>
+    <textarea name="content"></textarea>
+  </div>
+  <div class="flex" style="padding: 0 0.5rem;">
+    <label class="sans-cond underline">Markdown preview</label>
+    <graphic-stack id="markup" style="margin: 0.5rem 0; overflow: auto"></graphic-stack>
+  </div>
 </div>
 
 <label class="sans-cond">Positioning</label>
@@ -45,8 +51,9 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
 <!-- Page script -->
 <script>
-  var b = document.querySelector('button');
-  b.addEventListener('click', handleClick);
+  document.querySelector('button').addEventListener('click', handleClick);
+  document.querySelector('textarea[name="content"]').addEventListener('input', previewMarkdown);
+  var markup = document.querySelector('#markup');
 
   function handleClick() {
     var v = {
@@ -74,6 +81,10 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
     document.querySelector('#code').value = formatCode(preview.innerHTML);
     document.querySelector('#settings').removeAttribute('hidden');
+  }
+
+  function previewMarkdown(e) {
+    markup.innerHTML = marked(e.target.value);
   }
 </script>
 
