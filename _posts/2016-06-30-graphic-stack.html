@@ -67,16 +67,18 @@ excerpt: The `graphic-stack` element shows a single image in the body of a story
     var t = document.querySelector('template');
     var stack = t.content.querySelector('graphic-stack');
     var preview = document.querySelector('#preview');
+    var desktop = stack.querySelector('.desktop');
+    var mobile = stack.querySelector('.mobile');
+    var content = stack.querySelector('.content');
 
     stack.setAttribute('position', v.position);
-    stack.querySelector('.desktop').src = v.desktop ? v.desktop : '';
-    stack.querySelector('.mobile').src = v.mobile ? v.mobile : '';
-    stack.querySelector('.content').innerHTML = v.content;
+    desktop.src = v.desktop ? v.desktop : '';
+    desktop.classList.toggle('single', !v.mobile)
+    mobile.src = v.mobile ? v.mobile : '';
+    mobile.classList.toggle('hidden', !v.mobile);
+    content.innerHTML = v.content;
 
-    while(preview.firstChild) {
-      preview.removeChild(preview.firstChild);
-    }
-
+    preview.innerHTML = '';
     var clone = document.importNode(t.content, true);
     preview.appendChild(clone);
 

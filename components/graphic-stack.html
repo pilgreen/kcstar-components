@@ -26,35 +26,35 @@ created 2016-01-11
         margin: 0 15px 15px 0;
       }
 
-      :host ::content .mobile {
+      ::content .mobile, ::content.hidden {
         display: none;
       }
 
-      :host ::content > * {
+      ::content > * {
         margin: 0.5rem 0;
       }
 
-      :host ::content :first-child {
+      ::content :first-child {
         margin-top: 0;
       }
 
-      :host ::content :last-child {
+      ::content :last-child {
         margin-bottom: 0;
       }
 
-      :host ::content img {
+      ::content img {
         display: block;
         max-width: 100%;
         margin: 0;
       }
 
-      :host ::content h1 {
+      ::content h1 {
         font-family: 'McClatchy Slab','McClatchySlab',Georgia,Times,serif;
         font-size: 2rem;
         margin: 0.5rem 0;
       }
 
-      :host ::content p {
+      ::content p {
         font-size: 13px !important;
         margin: 0.25rem 0;
       }
@@ -66,11 +66,11 @@ created 2016-01-11
           margin: 2rem 0 !important;
         }
 
-        :host ::content .desktop {
+        ::content .desktop {
           display: none;
         }
 
-        :host ::content .mobile {
+        ::content .mobile, ::content .desktop.single {
           display: block;
         }
       }
