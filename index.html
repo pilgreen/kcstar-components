@@ -8,12 +8,25 @@ layout: default
 </header>
 
 <section>
-  <h2 class="sans-cond underline">Graphic Elements</h2>
+  <h2 class="sans-cond underline">Data elements</h2>
+  <div class="horizontal wrap layout">
+    {% for item in site.tags.data %}
+      <a class="card" href="{{ item.url | prepend:site.baseurl }}">
+        <img class="max" src="img/responsive-table.gif">
+        <h2 class="slab">{{ item.title }}</h2>
+        <p>{{ item.excerpt }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2 class="sans-cond underline">Graphic elements</h2>
   <div class="horizontal wrap layout">
     {% for item in site.tags.graphics %}
       <a class="card" href="{{ item.url | prepend:site.baseurl }}">
         <img class="max" src="img/graphic-stack.gif">
-        <h2 class="sans-cond">{{ item.title }}</h2>
+        <h2 class="slab">{{ item.title }}</h2>
         <p>{{ item.excerpt }}</p>
       </a>
     {% endfor %}

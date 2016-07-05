@@ -3,28 +3,28 @@ layout: page
 title: responsive-table
 permalink: /responsive-table/
 tags: data
-excerpt: The `responsive-table` element controls what columns should be visible on mobile devices.
+excerpt: The `responsive-table` element shows data copied from a Google Spreadsheet with formatting options.
 ---
 
 <link rel="import" href="components/responsive-table.html">
 <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
 
+<p>Copy data in a Google Spreadsheet and paste into the box below.</p>
+
 <label class="sans-cond">Spreadsheet data</label>
-<textarea id="rawdata" class="nowrap">Name	City	Price	Rating
-Superette	Holliston	$8.00	4.5
-Tasty Treat	Ashland	$5.00	2.0
-Big Fresh	Framingham	$9.00	5.0
-Seta's Cafe	Watertown	$7.50	3.8</textarea>
+<textarea id="rawdata" class="nowrap"></textarea>
 <button id="start">get started</button>
 
 <div id="settings" hidden>
-  <h3 class="slab">Column settings</h3>
+  <h3 class="slab underline">Column settings</h3>
   <div id="headers"></div>
 
-  <h3 class="slab">Options</h3>
+  <h3 class="slab underline">Options</h3>
   <paper-toggle-button id="zebra" class="sans-cond">Zebra striping</paper-toggle-button>
 
+  <h3 class="slab underline">Preview</h3>
   <div id="preview"></div>
+
   <label class="sans-cond">Copy this code</label>
   <textarea id="code"></textarea>
 </div>
@@ -68,6 +68,8 @@ Seta's Cafe	Watertown	$7.50	3.8</textarea>
     var t = document.querySelector('template[data-role="row"]');
     var mobile = t.content.querySelector('.mobile');
     var number = t.content.querySelector('.number');
+
+    p.innerHTML = '';
 
     data.head.forEach(function(d, i) {
       t.content.querySelector('h4').textContent = d;

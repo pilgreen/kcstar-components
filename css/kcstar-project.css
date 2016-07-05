@@ -92,6 +92,7 @@ a {
 }
 
 .underline {
+  padding-bottom: 0.1rem;
   border-bottom: 1px solid #999;
 }
 
@@ -101,6 +102,7 @@ a {
 
 .headline {
   font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
 .kicker {

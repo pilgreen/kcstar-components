@@ -97,12 +97,6 @@ button:hover {
   color: #FF5733;
 }
 
-#preview {
-  margin: 1rem 0;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-}
-
 .clearfix:after {
 	visibility: hidden;
 	display: block;
