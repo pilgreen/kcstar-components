@@ -79,6 +79,7 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
     var imgString = v.mobile ? `<img class="desktop" src="${v.desktop}">\n<img class="mobile" src="${v.mobile}">` : `<img src="${v.desktop}">`
 
     code.value = `
+<script src="https://pilgreen.github.io/kcstar-webcomponents/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>
 <link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/components/graphic-stack.html">
 <graphic-stack position="${v.position}">
 ${imgString.trim()}
