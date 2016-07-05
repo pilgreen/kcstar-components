@@ -1,0 +1,129 @@
+---
+layout: page
+title: responsive-table
+permalink: /responsive-table/
+tags: data
+excerpt: The `responsive-table` element controls what columns should be visible on mobile devices.
+---
+
+<link rel="import" href="components/responsive-table.html">
+<link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
+
+<label class="sans-cond">Spreadsheet data</label>
+<textarea id="rawdata" class="nowrap">Name	City	Price	Rating
+Superette	Holliston	$8.00	4.5
+Tasty Treat	Ashland	$5.00	2.0
+Big Fresh	Framingham	$9.00	5.0
+Seta's Cafe	Watertown	$7.50	3.8</textarea>
+<button id="start">get started</button>
+
+<div id="settings" hidden>
+  <h3 class="slab">Column settings</h3>
+  <div id="headers"></div>
+
+  <h3 class="slab">Options</h3>
+  <paper-toggle-button id="zebra" class="sans-cond">Zebra striping</paper-toggle-button>
+
+  <div id="preview"></div>
+  <label class="sans-cond">Copy this code</label>
+  <textarea id="code"></textarea>
+</div>
+
+
+<!-- Template helpers -->
+<template data-role="row">
+  <div class="horizontal center layout row sans-cond">
+    <h4 class="flex"></h4>
+    <paper-toggle-button class="flex number">Number</paper-toggle-button>
+    <paper-toggle-button class="flex mobile">Mobile</paper-toggle-button>
+  </div>
+</template>
+
+<template data-role="preview">
+  <table is="responsive-table">
+    <thead><tr></tr></thead>
+    <tbody></tbody>
+  </table>
+</template>
+
+
+<!-- Page script -->
+<script>
+  var data;
+  document.querySelector('#start').addEventListener('click', handleClick);
+  window.addEventListener('iron-change', redraw);
+
+  function handleClick() {
+    var raw = document.querySelector('#rawdata').value;
+    var rows = raw.split(/\n/);
+
+    data = {
+      head: rows.shift().split(/\t/),
+      body: rows.map(function(d) {
+        return d.split(/\t/);
+      })
+    }
+
+    var p = document.querySelector('#headers');
+    var t = document.querySelector('template[data-role="row"]');
+    var mobile = t.content.querySelector('.mobile');
+    var number = t.content.querySelector('.number');
+
+    data.head.forEach(function(d, i) {
+      t.content.querySelector('h4').textContent = d;
+
+      number.setAttribute('data-column', d);
+      if(!isNaN(parseFloat(data.body[0][i]))) number.setAttribute('checked', true);
+      else number.removeAttribute('checked');
+
+      mobile.setAttribute('data-column', d);
+      if(i < 4) mobile.setAttribute('checked', true);
+      else mobile.removeAttribute('checked');
+
+      var clone = document.importNode(t.content, true);
+      p.appendChild(clone);
+    });
+
+    document.querySelector('#settings').removeAttribute('hidden');
+    redraw();
+  }
+
+  function redraw() {
+    var p = document.querySelector('#preview');
+    var t = document.querySelector('template[data-role="preview"]');
+    var table = t.content.querySelector('table');
+    var head = t.content.querySelector('thead tr');
+    var body = t.content.querySelector('tbody');
+
+    table.classList.toggle('zebra', document.querySelector('#zebra').checked);
+
+    head.innerHTML = '';
+    body.innerHTML = '';
+
+    data.head.forEach(function(d) {
+      var th = document.createElement('th');
+      th.textContent = d;
+      th.classList.toggle('number', document.querySelector(`paper-toggle-button[data-column="${d}"].number`).checked);
+      th.classList.toggle('mobile', document.querySelector(`paper-toggle-button[data-column="${d}"].mobile`).checked);
+      head.appendChild(th);
+    });
+
+    data.body.forEach(function(d) {
+      var tr = document.createElement('tr');
+      d.forEach(function(t, i) {
+        var td = document.createElement('td');
+        td.textContent = t;
+        td.classList.toggle('number', document.querySelector(`paper-toggle-button[data-column="${data.head[i]}"].number`).checked);
+        td.classList.toggle('mobile', document.querySelector(`paper-toggle-button[data-column="${data.head[i]}"].mobile`).checked);
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+
+    p.innerHTML = '';
+    var clone = document.importNode(t.content, true);
+    p.appendChild(clone);
+
+    document.querySelector('#code').value = formatCode(p.innerHTML);
+  }
+</script>

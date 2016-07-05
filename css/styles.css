@@ -5,6 +5,7 @@
 
 body {
   font-size: 18px;
+  padding: 1rem;
 }
 
 .sans {
@@ -20,6 +21,7 @@ body {
   -ms-flex: 0 1 240px;
   -webkit-flex: 0 1 240px;
   flex: 0 1 240px;
+  color: inherit;
 }
 
 .card > * {
@@ -73,14 +75,9 @@ textarea {
   font-family: monospace;
 }
 
-.nowrap {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.generate {
+button {
   display: block;
-  margin: 3rem auto;
+  margin: 1rem auto 2rem;
   padding: 0.5rem;
   width: 300px;
   border: none;
@@ -94,7 +91,7 @@ textarea {
   cursor: pointer;
 }
 
-.generate:hover {
+button:hover {
   color: #FF5733;
 }
 
@@ -111,4 +108,13 @@ textarea {
 	content: " ";
 	clear: both;
 	height: 0;
+}
+
+.horizontal.row > * {
+  margin: 0.25rem 0;
+  padding-right: 0.5rem;
+}
+
+paper-toggle-button {
+  cursor: pointer;
 }

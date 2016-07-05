@@ -15,7 +15,9 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 <input type="text" class="space" name="mobileImage">
 
 <label class="sans-cond">Content</label>
-<textarea name="content" class="space"></textarea>
+<div class="horizontal space layout">
+  <textarea name="content" class="flex"></textarea>
+</div>
 
 <label class="sans-cond">Positioning</label>
 <div class="horizontal layout space">
@@ -26,9 +28,11 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
 <button class="generate">generate code</button>
 
-<div id="preview" class="clearfix"></div>
-<label class="sans-cond">Copy this code</label>
-<textarea id="code" class="nowrap"></textarea>
+<div id="settings" hidden>
+  <div id="preview" class="clearfix"></div>
+  <label class="sans-cond">Copy this code</label>
+  <textarea id="code"></textarea>
+</div>
 
 <!-- Template content -->
 <template>
@@ -52,11 +56,6 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
       position: document.querySelector('input[name="position"]:checked').value
     }
 
-    generatePreview(v);
-    generateCode(v);
-  }
-
-  function generatePreview(v) {
     var t = document.querySelector('template');
     var stack = t.content.querySelector('graphic-stack');
     var preview = document.querySelector('#preview');
@@ -72,19 +71,9 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
 
     var clone = document.importNode(t.content, true);
     preview.appendChild(clone);
-  }
 
-  function generateCode(v) {
-    var code = document.querySelector('#code');
-    var imgString = v.mobile ? `<img class="desktop" src="${v.desktop}">\n<img class="mobile" src="${v.mobile}">` : `<img src="${v.desktop}">`
-
-    code.value = `
-<script src="https://pilgreen.github.io/kcstar-webcomponents/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>
-<link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/components/graphic-stack.html">
-<graphic-stack position="${v.position}">
-${imgString.trim()}
-${v.content.trim()}
-</graphic-stack>`.trim();
+    document.querySelector('#code').value = formatCode(preview.innerHTML);
+    document.querySelector('#settings').removeAttribute('hidden');
   }
 </script>
 

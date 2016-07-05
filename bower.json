@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "polymer": "^1.6.0",
-    "marked": "^0.3.5"
+    "marked": "^0.3.5",
+    "paper-toggle-button": "polymerelements/paper-toggle-button#^1.1.2"
   }
 }
