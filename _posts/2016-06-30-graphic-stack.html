@@ -19,7 +19,7 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
     <label class="sans-cond">Content</label>
     <textarea name="content"></textarea>
   </div>
-  <div class="flex" style="padding: 0 0.5rem;">
+  <div class="flex" style="padding-left: 0.5rem;">
     <label class="sans-cond underline">Markdown preview</label>
     <graphic-stack id="markup" style="margin: 0.5rem 0; overflow: auto"></graphic-stack>
   </div>
@@ -79,7 +79,7 @@ excerpt: The `graphic-stack` element provides structure for a single image in th
     var clone = document.importNode(t.content, true);
     preview.appendChild(clone);
 
-    document.querySelector('#code').value = formatCode(preview.innerHTML);
+    document.querySelector('#code').value = formatCode(preview.innerHTML, ['components/graphic-stack.html']);
     document.querySelector('#settings').removeAttribute('hidden');
   }
 

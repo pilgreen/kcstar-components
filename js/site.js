@@ -3,11 +3,17 @@
  * created 2016-07-05
  */
 
-function formatCode(str) {
+function formatCode(str, comps = []) {
+  var components = ''
+  comps.forEach(function(d) {
+    components += `<link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/${d}">\n`;
+  });
+
   var code = str.replace(/></gm, '>\n<');
+
   var full = `
     <script src="https://pilgreen.github.io/kcstar-webcomponents/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>
-    <link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/components/graphic-stack.html">
+    ${components}
     ${code}
   `
 

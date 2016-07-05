@@ -124,6 +124,6 @@ Seta's Cafe	Watertown	$7.50	3.8</textarea>
     var clone = document.importNode(t.content, true);
     p.appendChild(clone);
 
-    document.querySelector('#code').value = formatCode(p.innerHTML);
+    document.querySelector('#code').value = formatCode(p.innerHTML, ['components/responsive-table.html']);
   }
 </script>
