@@ -1,0 +1,58 @@
+<!--
+Responsive Table
+created 2016-07-05
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="responsive-table">
+  <template>
+    <style>
+      :host {
+        width: 100%;
+        margin: 2rem 0;
+        font-family: 'McClatchy Sans',Helvetica,Arial,sans-serif !important;
+        border-collapse: collapse;
+      }
+
+      :host.zebra ::content tr:nth-child(even) {
+        background-color: #efefef;
+      }
+
+      ::content th, ::content td {
+        text-align: left;
+        padding: 0.25rem;
+        border-bottom: 1px solid #ddd;
+      }
+
+      ::content th {
+        font-size: 12px;
+        vertical-align: bottom;
+      }
+
+      ::content td {
+        font-size: 14px;
+      }
+
+      ::content .number {
+        text-align: right;
+      }
+
+      @media (max-width: 600px) {
+        ::content tr > :not(.mobile) {
+          display: none;
+        }
+      }
+
+    </style>
+
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'responsive-table',
+    extends: 'table'
+  });
+</script>
