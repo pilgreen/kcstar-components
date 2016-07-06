@@ -9,11 +9,11 @@ layout: default
 
 <section>
   <h2 class="sans-cond underline">Data elements</h2>
-  <div class="horizontal wrap layout">
+  <div class="horizontal wrap flush layout">
     {% for item in site.tags.data %}
       <a class="card" href="{{ item.url | prepend:site.baseurl }}">
-        <img class="max" src="img/responsive-table.gif">
-        <h2 class="slab">{{ item.title }}</h2>
+        <iron-image src="{{ item.img }}" sizing="cover"></iron-image>
+        <h3 class="slab">{{ item.title }}</h3>
         <p>{{ item.excerpt }}</p>
       </a>
     {% endfor %}
@@ -22,11 +22,11 @@ layout: default
 
 <section>
   <h2 class="sans-cond underline">Graphic elements</h2>
-  <div class="horizontal wrap layout">
+  <div class="horizontal wrap flush layout">
     {% for item in site.tags.graphics %}
       <a class="card" href="{{ item.url | prepend:site.baseurl }}">
-        <img class="max" src="img/graphic-stack.gif">
-        <h2 class="slab">{{ item.title }}</h2>
+        <iron-image src="{{ item.img }}" sizing="cover"></iron-image>
+        <h3 class="slab">{{ item.title }}</h3>
         <p>{{ item.excerpt }}</p>
       </a>
     {% endfor %}

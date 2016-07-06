@@ -1,0 +1,81 @@
+---
+layout: page
+title: thumbnail-stack
+permalink: /thumbnail-stack/
+tags: graphics
+excerpt: This element shows a series of images stack on top of each other.
+img: img/thumbnail-stack.png
+---
+
+<link rel="import" href="components/thumbnail-stack.html">
+
+<div id="items"></div>
+
+<div class="horizontal center-justified layout">
+  <button id="add" class="generate">add an item</button>
+  <button id="generate" class="generate">generate code</button>
+</div>
+
+<div id="settings" hidden>
+  <h3 class="slab underline">Preview</h3>
+  <div id="preview"></div>
+  <label class="sans-cond">Copy this code</label>
+  <textarea id="code"></textarea>
+</div>
+
+<!-- templates -->
+<template for="item">
+  <div class="item">
+    <label class="sans-cond">Image URL</label>
+    <input type="text" class="space"></input>
+    <label class="sans-cond">Content</label>
+    <textarea class="short"></textarea>
+  </div>
+</template>
+
+<template for="output">
+  <thumbnail-stack>
+    <img>
+    <div class="thumbnail-stack-content"></div>
+  </thumbnail-stack>
+</template>
+
+<!-- Page script -->
+<script>
+  var settings = document.querySelector('#settings');
+  var preview = document.querySelector('#preview');
+  var code = document.querySelector('#code');
+
+  // Events
+  document.addEventListener('DOMContentLoaded', addItem);
+  document.querySelector('#add').addEventListener('click', addItem);
+  document.querySelector('#generate').addEventListener('click', generateCode);
+
+  function addItem() {
+    var t = document.querySelector('template[for="item"]');
+    var clone = document.importNode(t.content, true);
+    document.querySelector('#items').appendChild(clone);
+  }
+
+  function generateCode() {
+    var t = document.querySelector('template[for="output"]');
+    var items = document.querySelectorAll('.item');
+    var output = [];
+    
+    preview.innerHTML = '';
+
+    for(var i = 0, len = items.length; i < len; i++) {
+      var d = items[i];
+
+      t.content.querySelector('img').src = d.querySelector('input').value;
+      t.content.querySelector('div').innerHTML = marked(d.querySelector('textarea').value);
+
+      preview.appendChild(document.importNode(t.content, true));
+      output.push(t.innerHTML);
+    }
+
+    code.value = formatCode(output.join("\n"), ["components/thumbnail-stack.html"]);
+    settings.removeAttribute('hidden');
+  }
+</script>
+

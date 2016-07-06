@@ -3,7 +3,8 @@ layout: page
 title: graphic-stack
 permalink: /graphic-stack/
 tags: graphics
-excerpt: The `graphic-stack` element shows a single image in the body of a story.
+excerpt: This element shows a single image in the body of a story.
+img: img/graphic-stack.png
 ---
 
 <link rel="import" href="components/graphic-stack.html">
@@ -32,7 +33,9 @@ excerpt: The `graphic-stack` element shows a single image in the body of a story
   <label><input type="radio" name="position" value="right">right</label>
 </div>
 
-<button class="generate">generate code</button>
+<div class="horizontal center-justified layout">
+  <button class="generate">generate code</button>
+</div>
 
 <div id="settings" hidden>
   <h3 class="slab underline">Preview</h3>
@@ -46,15 +49,20 @@ excerpt: The `graphic-stack` element shows a single image in the body of a story
   <graphic-stack>
     <img class="desktop">
     <img class="mobile">
-    <div class="content"></div>
+    <div class="graphic-stack-content"></div>
   </graphic-stack>
 </template>
 
 <!-- Page script -->
 <script>
+  var settings = document.querySelector('#settings');
+  var preview = document.querySelector('#preview');
+  var code = document.querySelector('#code');
+  var markup = document.querySelector('#markup');
+
+  // Events
   document.querySelector('button').addEventListener('click', handleClick);
   document.querySelector('textarea[name="content"]').addEventListener('input', previewMarkdown);
-  var markup = document.querySelector('#markup');
 
   function handleClick() {
     var v = {
@@ -66,10 +74,9 @@ excerpt: The `graphic-stack` element shows a single image in the body of a story
 
     var t = document.querySelector('template');
     var stack = t.content.querySelector('graphic-stack');
-    var preview = document.querySelector('#preview');
     var desktop = stack.querySelector('.desktop');
     var mobile = stack.querySelector('.mobile');
-    var content = stack.querySelector('.content');
+    var content = stack.querySelector('.graphic-stack-content');
 
     stack.setAttribute('position', v.position);
     desktop.src = v.desktop ? v.desktop : '';
@@ -79,11 +86,10 @@ excerpt: The `graphic-stack` element shows a single image in the body of a story
     content.innerHTML = v.content;
 
     preview.innerHTML = '';
-    var clone = document.importNode(t.content, true);
-    preview.appendChild(clone);
+    preview.appendChild(document.importNode(t.content, true));
 
-    document.querySelector('#code').value = formatCode(preview.innerHTML, ['components/graphic-stack.html']);
-    document.querySelector('#settings').removeAttribute('hidden');
+    code.value = formatCode(t.innerHTML, ['components/graphic-stack.html']);
+    settings.removeAttribute('hidden');
   }
 
   function previewMarkdown(e) {

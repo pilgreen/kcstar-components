@@ -13,19 +13,30 @@ body {
 }
 
 .panel.home > * {
-  padding: 2rem 0;
+  padding: 1rem 0;
+}
+
+.flush.layout {
+  margin-left: -1rem;
+  margin-right: -1rem;
 }
 
 .card {
   display: block;
-  -ms-flex: 0 1 240px;
-  -webkit-flex: 0 1 240px;
-  flex: 0 1 240px;
+  box-sizing: border-box;
+  padding: 0 1rem 1rem;
+  -webkit-flex: 0 1 calc((100% / 3));
+  flex: 0 1 calc((100% / 3));
   color: inherit;
 }
 
 .card > * {
   margin: 0.25rem 0;
+}
+
+.card iron-image {
+  width: 100%;
+  height: 175px;
 }
 
 .card p {
@@ -46,6 +57,10 @@ textarea {
   height: 300px;
   border-color: #ddd;
   box-sizing: border-box;
+}
+
+textarea.short {
+  height: 150px;
 }
 
 label {
@@ -79,7 +94,7 @@ textarea {
 
 button {
   display: block;
-  margin: 1rem auto 2rem;
+  margin: 1rem 0.5rem 2rem;
   padding: 0.5rem;
   width: 300px;
   border: none;
@@ -113,4 +128,10 @@ button:hover {
 
 paper-toggle-button {
   cursor: pointer;
+}
+
+.item + .item {
+  margin-top: 1rem;
+  border-top: 3px solid #004B76;
+  padding-top: 1rem;
 }
