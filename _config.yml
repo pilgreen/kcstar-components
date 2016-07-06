@@ -5,7 +5,7 @@ email: jpilgreen@kcstar.com
 description:
   A collection of elements used by The Kansas City Star.
 
-baseurl: /kcstar-webcomponents/
+baseurl: /kcstar-webcomponents
 url: http://pilgreen.github.io
 
 # Build settings
