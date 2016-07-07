@@ -19,3 +19,16 @@ function formatCode(str, comps = []) {
 
   return full.replace(/^\s+/gm, '');
 }
+
+/**
+ * Page Load
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  var codeBox = document.querySelector('#code');
+  if(codeBox) {
+    codeBox.addEventListener('click', function() {
+      this.select();
+    });
+  }
+});

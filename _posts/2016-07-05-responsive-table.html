@@ -10,10 +10,10 @@ img: img/responsive-table.png
 <link rel="import" href="components/responsive-table.html">
 <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
 
-<p>Copy data in a Google Spreadsheet and paste into the box below.</p>
+<p>Paste data from a Google Spreadsheet into the box below. Please include a header row.</p>
 
 <label class="sans-cond">Spreadsheet data</label>
-<textarea id="rawdata" class="nowrap"></textarea>
+<textarea id="rawdata"></textarea>
 
 <div class="horizontal center-justified layout">
   <button id="start">get started</button>
@@ -102,20 +102,20 @@ img: img/responsive-table.png
   function redraw() {
     var t = document.querySelector('template[data-role="preview"]');
     var table = t.content.querySelector('table');
-    var head = t.content.querySelector('thead tr');
-    var body = t.content.querySelector('tbody');
+    var thead = t.content.querySelector('thead tr');
+    var tbody = t.content.querySelector('tbody');
 
     table.classList.toggle('zebra', document.querySelector('#zebra').checked);
 
-    head.innerHTML = '';
-    body.innerHTML = '';
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
 
     data.head.forEach(function(d) {
       var th = document.createElement('th');
       th.textContent = d;
       th.classList.toggle('number', document.querySelector(`paper-toggle-button[data-column="${d}"].number`).checked);
       th.classList.toggle('mobile', document.querySelector(`paper-toggle-button[data-column="${d}"].mobile`).checked);
-      head.appendChild(th);
+      thead.appendChild(th);
     });
 
     data.body.forEach(function(d) {
@@ -127,12 +127,12 @@ img: img/responsive-table.png
         td.classList.toggle('mobile', document.querySelector(`paper-toggle-button[data-column="${data.head[i]}"].mobile`).checked);
         tr.appendChild(td);
       });
-      body.appendChild(tr);
+      tbody.appendChild(tr);
     });
 
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
 
-    document.querySelector('#code').value = formatCode(t.innerHTML, ['components/responsive-table.html']);
+    code.value = formatCode(t.innerHTML, ['components/responsive-table.html']);
   }
 </script>

@@ -1,0 +1,126 @@
+<!--
+Bar Chart table component
+created 2016-07-07
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="d3-import.html">
+
+<dom-module id="bar-chart">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: 'McClatchy Sans',Helvetica,Arial,sans-serif !important;
+        font-size: 13px;
+        margin: 1rem 0;
+      }
+
+      .bar-chart-item {
+        margin: 0.75rem 0;
+      }
+
+      .bar-chart-name {
+        margin: 0;
+        font-weight: normal;
+        padding-bottom: 2px;
+      }
+
+      .bar-chart-values {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+
+      .bar-chart-values span {
+        display: block;
+      }
+
+      .bar-chart-bar {
+        background-color: #ddd;
+        height: 27px;
+      }
+
+      .bar-chart-bar[highlight] {
+        background-color: #004B76;
+      }
+
+      .bar-chart-label {
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 0.5em;
+      }
+    </style>
+
+    <template is="dom-repeat" items="[[_data]]">
+      <div class="bar-chart-item">
+        <h4 class="bar-chart-name">[[item.name]]</h4>
+        <div class="bar-chart-values">
+          <span class="bar-chart-bar" style$="width: [[item.width]]%;" highlight$="[[item.highlight]]"></span>
+          <span class="bar-chart-label">[[item.value]]</span>
+        </div>
+      </div>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'bar-chart',
+    extends: 'table',
+
+    properties: {
+      tableData: {
+        type: Array,
+        value: [],
+        observer: 'parseTableData'
+      },
+
+      _data: Array,
+      _highlights: Array
+    },
+
+    attached: function() {
+      var tbody = this.queryEffectiveChildren('tbody');
+      var trows = tbody.querySelectorAll('tr'); // Check this in other browsers if not working
+      var data = [];
+
+      for(var i = 0, len = trows.length; i < len; i++) {
+        var row = trows[i];
+        var tds = row.querySelectorAll('td');
+
+        data.push({
+          name: tds[0].textContent,
+          value: tds[1].textContent,
+          highlight: row.classList.contains('highlight')
+        });
+      }
+
+      this.set('tableData', data);
+    },
+
+    parseTableData: function(data) {
+      var values = data.map(function(d) {
+        return this.getNumber(d.value);
+      }.bind(this));
+
+      this._scale = d3.scaleLinear().range([10, 75]).domain([0, d3.max(values)]);
+      this.set('_data', data.map(function(d) {
+        d.width = this._scale(this.getNumber(d.value));
+        return d;
+      }.bind(this)));
+    },
+
+    getNumber: function(value) {
+      switch(typeof value) {
+        case 'number':
+          return value;
+        case 'string':
+          var match = value.match(/(\d+|\.)/g, '');
+          return match ? Number(match.join('')) : NaN;
+        default:
+          return NaN;
+      }
+    }
+  });
+</script>

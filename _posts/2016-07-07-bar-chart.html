@@ -1,0 +1,146 @@
+---
+layout: page
+title: bar-chart
+permalink: /bar-chart/
+tags: data
+excerpt: This element makes a bar chart out of a 2-column table.
+img: img/responsive-table.png
+---
+
+<link rel="import" href="bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="components/bar-chart.html">
+<link rel="import" href="components/lodash-import.html">
+
+<p>Paste data from a Google Spreadsheet into the box below. Please include a header row.</p>
+
+<section>
+  <label class="sans-cond">Spreadsheet data</label>
+  <textarea id="rawdata"></textarea>
+</section>
+
+<section class="horizontal center-justified layout">
+  <button id="start">get started</button>
+</section>
+
+<div id="settings" hidden>
+  <section>
+    <h3 class="title">Options</h3>
+    <label>Lead in <small>markdown enabled</small></label>
+    <textarea class="short" name="lead"></textarea>
+
+    <label>Sort</label>
+    <iron-selector id="sort" class="horizontal layout" attr-for-selected="name" selected="default">
+      <span class="button" name="default">default</span>
+      <span class="button" name="descending">descending &darr;</span>
+      <span class="button" name="ascending">ascending &uarr;</span>
+      <span class="button" name="alphabetical">alphabetical</span>
+    </iron-selector>
+  </section>
+
+  <section>
+    <h3 class="title">Preview</h3>
+    <div id="preview"></div>
+  </section>
+
+  <section>
+    <label>Copy this code</label>
+    <textarea id="code" readonly></textarea>
+  </section>
+</div>
+
+
+<!-- Template helpers -->
+<template data-role="preview">
+  <div class="lead-in"></div>
+  <table is="bar-chart">
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</template>
+
+
+<!-- Page script -->
+<script>
+  var settings = document.querySelector('#settings');
+  var preview = document.querySelector('#preview');
+  var code = document.querySelector('#code');
+  var data;
+
+  document.querySelector('#start').addEventListener('click', handleClick);
+
+  function handleClick() {
+    var raw = document.querySelector('#rawdata').value;
+    var rows = raw.split(/\n/);
+
+    data = {
+      head: rows.shift().split(/\t/),
+      body: rows.map(function(d) {
+        return d.split(/\t/);
+      })
+    }
+
+    redraw();
+
+    // New Events
+    document.querySelector('textarea[name="lead"]').addEventListener('input', redraw);
+    document.addEventListener('iron-select', redraw);
+  }
+
+  function redraw() {
+    var t = document.querySelector('template[data-role="preview"]');
+    var sort = document.querySelector('#sort');
+    var leadIn = t.content.querySelector('.lead-in');
+    var table = t.content.querySelector('table');
+    var thead = t.content.querySelector('thead tr');
+    var tbody = t.content.querySelector('tbody');
+
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
+
+    leadIn.innerHTML = marked(document.querySelector('textarea[name="lead"]').value);
+
+    data.head.forEach(function(d) {
+      var th = document.createElement('th');
+      th.textContent = d;
+      thead.appendChild(th);
+    });
+
+    var sorted = [];
+    var barChart = preview.querySelector('table');
+    switch(sort.selected) {
+      case 'default':
+        sorted = data.body;
+        break;
+      case 'descending':
+        sorted = _.sortBy(data.body, function(d) {
+          return barChart.getNumber(d[1]);
+        }).reverse();
+        break;
+      case 'ascending':
+        sorted = _.sortBy(data.body, function(d) {
+          return barChart.getNumber(d[1]);
+        });
+        break;
+      case 'alphabetical':
+        sorted = _.sortBy(data.body, [0]);
+    }
+
+    sorted.forEach(function(d) {
+      var tr = document.createElement('tr');
+      d.forEach(function(t, i) {
+        var td = document.createElement('td');
+        td.textContent = t;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    preview.innerHTML = '';
+    preview.appendChild(document.importNode(t.content, true));
+
+    code.value = formatCode(t.innerHTML, ['components/bar-chart.html']);
+    settings.removeAttribute('hidden');
+  }
+</script>

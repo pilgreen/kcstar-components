@@ -8,6 +8,22 @@ body {
   padding: 1rem;
 }
 
+section {
+  margin: 3rem 0;
+}
+
+section .title {
+  font-family: "Helvetica", sans-serif;
+  font-weight: 200;
+  font-size: 26px;
+  text-align: center;
+  color: #999;
+}
+
+/**
+ * Home Page
+ */
+
 .sans {
   font-family: Helvetica, sans-serif;
 }
@@ -44,7 +60,7 @@ body {
 }
 
 /**
- * Page styles 
+ * Page Styles
  */
 
 .headline iron-icon {
@@ -53,28 +69,23 @@ body {
   color: #999;
 }
 
-.space {
-  margin-bottom: 1rem;
-}
-
-textarea {
-  display: block;
-  width: 100%;
-  height: 300px;
-  border-color: #ddd;
-  box-sizing: border-box;
-}
-
-textarea.short {
-  height: 150px;
+.underline {
+  margin-bottom: 0;
 }
 
 label {
   display: block;
+  margin-top: 1rem;
+  font-family: "McClatchySansCond", "Helvetica Condensed", sans-serif;
 }
 
 label + label {
   margin-left: 1rem;
+}
+
+label small {
+  color: #999;
+  font-size: 0.75em;
 }
 
 input[type="text"] {
@@ -96,19 +107,26 @@ input[type="radio"] {
 textarea {
   font-size: 15px;
   font-family: monospace;
+  display: block;
+  width: 100%;
+  height: 300px;
+  border-color: #ddd;
+  box-sizing: border-box;
 }
 
-button {
+textarea.short {
+  height: 125px;
+}
+
+button, .button {
   display: block;
-  margin: 1rem 0.5rem 2rem;
   padding: 0.5rem;
-  width: 300px;
   border: none;
   background-color: #333;
   color: white;
-  font-size: 19px;
+  font-size: 16px;
   text-align: center;
-  font-family: Helvetica, sans-serif;
+  font-family: "McClatchySans", Helvetica, sans-serif;
   font-weight: 200;
   text-transform: uppercase;
   cursor: pointer;
@@ -118,6 +136,14 @@ button:hover {
   color: #FF5733;
 }
 
+iron-selector .button {
+  margin-right: 0.5rem;
+}
+
+iron-selector .button:not(.iron-selected) {
+  background-color: #999;
+}
+
 .clearfix:after {
 	visibility: hidden;
 	display: block;
@@ -125,11 +151,6 @@ button:hover {
 	content: " ";
 	clear: both;
 	height: 0;
-}
-
-.horizontal.row > * {
-  margin: 0.25rem 0;
-  padding-right: 0.5rem;
 }
 
 paper-toggle-button {
