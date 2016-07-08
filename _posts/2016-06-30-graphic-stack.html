@@ -10,6 +10,17 @@ img: img/graphic-stack.png
 <link rel="import" href="bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="components/graphic-stack.html">
 
+<style>
+  #markup {
+    margin: 0;
+    overflow: auto;
+  }
+
+  #markup :first-child {
+    margin-top: 0;
+  }
+</style>
+
 <section>
   <label>Image URL <small>Desktop or single</small></label>
   <input type="text" name="desktopImage">
