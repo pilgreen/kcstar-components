@@ -7,41 +7,49 @@ excerpt: This element shows a single image in the body of a story.
 img: img/graphic-stack.png
 ---
 
+<link rel="import" href="bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="components/graphic-stack.html">
 
-<label class="sans-cond">Image URL <small>(Desktop or single)</small></label>
-<input type="text" class="space" name="desktopImage">
+<section>
+  <label>Image URL <small>Desktop or single</small></label>
+  <input type="text" name="desktopImage">
 
-<label class="sans-cond">Image URL <small>(Mobile)</small></label>
-<input type="text" class="space" name="mobileImage">
+  <label>Image URL <small>Mobile</small></label>
+  <input type="text" name="mobileImage">
 
-<div class="horizontal space layout">
-  <div class="flex">
-    <label class="sans-cond">Content</label>
-    <textarea name="content"></textarea>
+  <div class="horizontal layout">
+    <div class="flex">
+      <label>Content <small>markdown enabled</small></label>
+      <textarea name="content"></textarea>
+    </div>
+    <div class="flex" style="padding-left: 0.5rem;">
+      <label class="underline">Content preview</label>
+      <graphic-stack id="markup" style="margin: 0.5rem 0; overflow: auto"></graphic-stack>
+    </div>
   </div>
-  <div class="flex" style="padding-left: 0.5rem;">
-    <label class="sans-cond underline">Markdown preview</label>
-    <graphic-stack id="markup" style="margin: 0.5rem 0; overflow: auto"></graphic-stack>
-  </div>
-</div>
 
-<label class="sans-cond">Positioning</label>
-<div class="horizontal layout space">
-  <label><input type="radio" name="position" value="full" checked>full</label>
-  <label><input type="radio" name="position" value="left">left</label>
-  <label><input type="radio" name="position" value="right">right</label>
-</div>
+  <label>Positioning</label>
+  <iron-selector id="position" class="horizontal layout" attr-for-selected="name" selected="full">
+    <span class="button" name="full">full</span>
+    <span class="button" name="left">left</span>
+    <span class="button" name="right">right</span>
+  </iron-selector>
+</section>
 
-<div class="horizontal center-justified layout">
+<section class="horizontal center-justified layout">
   <button class="generate">generate code</button>
-</div>
+</section>
 
 <div id="settings" hidden>
-  <h3 class="slab underline">Preview</h3>
-  <div id="preview" class="clearfix"></div>
-  <label class="sans-cond">Copy this code</label>
-  <textarea id="code"></textarea>
+  <section>
+    <h3 class="title">Preview</h3>
+    <div id="preview" class="clearfix"></div>
+  </section>
+
+  <section>
+    <label>Copy this code</label>
+    <textarea id="code"></textarea>
+  </section>
 </div>
 
 <!-- Template content -->
@@ -69,7 +77,7 @@ img: img/graphic-stack.png
       desktop: document.querySelector('input[name="desktopImage"]').value,
       mobile: document.querySelector('input[name="mobileImage"]').value,
       content: marked(document.querySelector('textarea[name="content"]').value),
-      position: document.querySelector('input[name="position"]:checked').value
+      position: document.querySelector('#position').selected
     }
 
     var t = document.querySelector('template');

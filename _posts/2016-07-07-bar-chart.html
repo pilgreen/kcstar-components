@@ -11,11 +11,22 @@ img: img/responsive-table.png
 <link rel="import" href="components/bar-chart.html">
 <link rel="import" href="components/lodash-import.html">
 
+<style>
+  .bar-chart-bar {
+    cursor: pointer;
+  }
+</style>
+
 <p>Paste data from a Google Spreadsheet into the box below. Please include a header row.</p>
 
 <section>
   <label class="sans-cond">Spreadsheet data</label>
-  <textarea id="rawdata"></textarea>
+  <textarea id="rawdata">industry	Average 2014 Income
+Securities brokerage	574
+Securities, commodity contracts, and other financial investments and related activities	142
+Land subdivision	335
+Securities and commodity contracts intermediation and brokerage	409
+Grocery and related product merchant wholesalers	117</textarea>
 </section>
 
 <section class="horizontal center-justified layout">
@@ -67,8 +78,10 @@ img: img/responsive-table.png
   var preview = document.querySelector('#preview');
   var code = document.querySelector('#code');
   var data;
+  var highlights = [];
 
   document.querySelector('#start').addEventListener('click', handleClick);
+  preview.addEventListener('click', handleHighlightClick);
 
   function handleClick() {
     var raw = document.querySelector('#rawdata').value;
@@ -129,11 +142,18 @@ img: img/responsive-table.png
 
     sorted.forEach(function(d) {
       var tr = document.createElement('tr');
+
       d.forEach(function(t, i) {
         var td = document.createElement('td');
         td.textContent = t;
+
+        if(highlights.indexOf(t) > -1) {
+          tr.classList.add('highlight');
+        }
+
         tr.appendChild(td);
       });
+
       tbody.appendChild(tr);
     });
 
@@ -142,5 +162,19 @@ img: img/responsive-table.png
 
     code.value = formatCode(t.innerHTML, ['components/bar-chart.html']);
     settings.removeAttribute('hidden');
+  }
+
+  function handleHighlightClick(e) {
+    if(e.target.nodeName == 'SPAN') {
+      var name = e.target.parentElement.previousElementSibling.textContent;
+
+      if(highlights.indexOf(name) > -1) {
+        _.pull(highlights, name);
+      } else {
+        highlights.push(name);
+      }
+
+      redraw();
+    }
   }
 </script>

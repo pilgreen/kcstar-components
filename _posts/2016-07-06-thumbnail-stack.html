@@ -9,26 +9,34 @@ img: img/thumbnail-stack.png
 
 <link rel="import" href="components/thumbnail-stack.html">
 
-<div id="items"></div>
+<section>
+  <div id="items"></div>
+</section>
 
-<div class="horizontal center-justified layout">
+<section class="horizontal center-justified layout">
   <button id="add" class="generate">add an item</button>
+  <div class="spacer"></div>
   <button id="generate" class="generate">generate code</button>
-</div>
+</section>
 
 <div id="settings" hidden>
-  <h3 class="slab underline">Preview</h3>
-  <div id="preview"></div>
-  <label class="sans-cond">Copy this code</label>
-  <textarea id="code"></textarea>
+  <section>
+    <h3 class="title">Preview</h3>
+    <div id="preview"></div>
+  </section>
+
+  <section>
+    <label class="sans-cond">Copy this code</label>
+    <textarea id="code"></textarea>
+  </section>
 </div>
 
 <!-- templates -->
 <template for="item">
   <div class="item">
     <label class="sans-cond">Image URL</label>
-    <input type="text" class="space"></input>
-    <label class="sans-cond">Content</label>
+    <input type="text"></input>
+    <label class="sans-cond">Content <small>markdown enabled</small></label>
     <textarea class="short"></textarea>
   </div>
 </template>

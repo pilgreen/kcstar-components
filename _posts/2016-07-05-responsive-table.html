@@ -12,25 +12,33 @@ img: img/responsive-table.png
 
 <p>Paste data from a Google Spreadsheet into the box below. Please include a header row.</p>
 
-<label class="sans-cond">Spreadsheet data</label>
-<textarea id="rawdata"></textarea>
+<section>
+  <label>Spreadsheet data</label>
+  <textarea id="rawdata"></textarea>
+</section>
 
-<div class="horizontal center-justified layout">
+<section class="horizontal center-justified layout">
   <button id="start">get started</button>
-</div>
+</section>
 
 <div id="settings" hidden>
-  <h3 class="slab underline">Column settings</h3>
-  <div id="headers"></div>
+  <section>
+    <h3 class="title">Column settings</h3>
+    <div id="headers"></div>
 
-  <h3 class="slab underline">Options</h3>
-  <paper-toggle-button id="zebra" class="sans-cond">Zebra striping</paper-toggle-button>
+    <h3 class="title">Options</h3>
+    <paper-toggle-button id="zebra" class="sans-cond">Zebra striping</paper-toggle-button>
+  </section>
 
-  <h3 class="slab underline">Preview</h3>
-  <div id="preview"></div>
+  <section>
+    <h3 class="title">Preview</h3>
+    <div id="preview"></div>
+  </section>
 
-  <label class="sans-cond">Copy this code</label>
-  <textarea id="code"></textarea>
+  <section>
+    <label>Copy this code</label>
+    <textarea id="code"></textarea>
+  </section>
 </div>
 
 

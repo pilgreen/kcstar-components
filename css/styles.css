@@ -60,17 +60,13 @@ section .title {
 }
 
 /**
- * Page Styles
+ * Pages
  */
 
 .headline iron-icon {
   width: 2rem;
   height: 2rem;
   color: #999;
-}
-
-.underline {
-  margin-bottom: 0;
 }
 
 label {
@@ -136,6 +132,10 @@ button:hover {
   color: #FF5733;
 }
 
+.spacer {
+  width: 0.5rem;
+}
+
 iron-selector .button {
   margin-right: 0.5rem;
 }
@@ -161,4 +161,8 @@ paper-toggle-button {
   margin-top: 1rem;
   border-top: 3px solid #004B76;
   padding-top: 1rem;
+}
+
+.row > * {
+  margin: 0.5rem 0;
 }
