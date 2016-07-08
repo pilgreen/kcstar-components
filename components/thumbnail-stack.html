@@ -12,7 +12,6 @@ created 2016-02-25
       :host {
         @apply(--layout-horizontal);
         margin: 1rem 0;
-        font-family: 'McClatchy Sans',Helvetica,Arial,sans-serif !important;
       }
 
       .thumbnail-stack-thumb {
@@ -30,22 +29,20 @@ created 2016-02-25
         @apply(--layout-flex);
       }
 
-      .thumbnail-stack-content ::content > * {
+      .thumbnail-stack-content > ::content * {
         margin: 0.5rem 0;
       }
 
-      .thumbnail-stack-content ::content > :first-child {
+      .thumbnail-stack-content > ::content :first-child {
         margin-top: 0;
       }
 
-      ::content h1 {
-        font-family: 'McClatchy Slab','McClatchySlab',Georgia,Times,serif;
-        font-size: 2rem;
+      .thumbnail-stack-content > ::content :last-child {
+        margin-bottom: 0;
       }
 
       ::content p {
-        font-size: 13px !important;
-        margin: 0.25rem 0;
+        font-size: 13px;
       }
 
       @media (max-width: 991px) {
