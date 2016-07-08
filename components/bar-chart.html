@@ -16,6 +16,10 @@ created 2016-07-07
         margin: 1rem 0;
       }
 
+      .bar-chart-name {
+        font-size: 1em;
+      }
+
       .bar-chart-item {
         margin: 0.75rem 0;
       }
@@ -53,7 +57,7 @@ created 2016-07-07
 
     <template is="dom-repeat" items="[[_data]]">
       <div class="bar-chart-item">
-        <h4 class="bar-chart-name">[[item.name]]</h4>
+        <div class="bar-chart-name">[[item.name]]</div>
         <div class="bar-chart-values">
           <span class="bar-chart-bar" style$="width: [[item.width]]%;" highlight$="[[item.highlight]]"></span>
           <span class="bar-chart-label">[[item.value]]</span>
