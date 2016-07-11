@@ -28,16 +28,8 @@ img: img/graphic-stack.png
   <label>Image URL <small>Mobile</small></label>
   <input type="text" name="mobileImage">
 
-  <div class="horizontal layout">
-    <div class="flex">
-      <label>Content <small>markdown enabled</small></label>
-      <textarea name="content"></textarea>
-    </div>
-    <div class="flex" style="padding-left: 0.5rem;">
-      <label class="underline">Content preview <small>not styled</small></label>
-      <graphic-stack id="markup" style="margin: 0.5rem 0; overflow: auto"></graphic-stack>
-    </div>
-  </div>
+  <label>Content <small><a href="markdown-preview/" target="_blank">markdown enabled</a></small></label>
+  <textarea name="content"></textarea>
 
   <label>Positioning</label>
   <iron-selector id="position" class="horizontal layout" attr-for-selected="name" selected="full">
@@ -81,7 +73,6 @@ img: img/graphic-stack.png
 
   // Events
   document.querySelector('button').addEventListener('click', handleClick);
-  document.querySelector('textarea[name="content"]').addEventListener('input', previewMarkdown);
 
   function handleClick() {
     var v = {
@@ -109,10 +100,6 @@ img: img/graphic-stack.png
 
     code.value = formatCode(t.innerHTML, ['components/graphic-stack.html']);
     settings.removeAttribute('hidden');
-  }
-
-  function previewMarkdown(e) {
-    markup.innerHTML = marked(e.target.value);
   }
 </script>
 

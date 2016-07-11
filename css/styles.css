@@ -9,7 +9,7 @@ body {
 }
 
 section {
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 section .title {
@@ -26,10 +26,6 @@ section .title {
 
 .sans {
   font-family: Helvetica, sans-serif;
-}
-
-.panel.home > * {
-  padding: 1rem 0;
 }
 
 .flush.layout {
@@ -105,13 +101,9 @@ textarea {
   font-family: monospace;
   display: block;
   width: 100%;
-  height: 300px;
+  height: 150px;
   border-color: #ddd;
   box-sizing: border-box;
-}
-
-textarea.short {
-  height: 125px;
 }
 
 button, .button {
@@ -165,6 +157,15 @@ paper-toggle-button {
 
 .row > * {
   margin: 0.5rem 0;
+}
+
+/**
+ * Full page
+ */
+
+.full {
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 /**
