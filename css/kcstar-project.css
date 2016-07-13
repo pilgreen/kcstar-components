@@ -15,28 +15,28 @@
 }
 
 @font-face {
-  font-family: "McClatchySans";
+  font-family: "McClatchy Sans";
   src: url(./fonts/McClatchySans-Regular.woff) format('woff');
 }
 
 @font-face {
-  font-family: "McClatchySans";
+  font-family: "McClatchy Sans";
   font-weight: bold;
   src: url(./fonts/McClatchySans-Semibold.woff) format('woff');
 }
 
 @font-face {
-  font-family: "McClatchySansCond";
+  font-family: "McClatchy Sans Cond";
   src: url(./fonts/McClatchySansCond-Semibold.woff) format('woff');
 }
 
 @font-face {
-  font-family: "McClatchySlab";
+  font-family: "McClatchy Slab";
   src: url(./fonts/McClatchySlab-Regular.woff) format('woff');
 }
 
 @font-face {
-  font-family: "McClatchySlab";
+  font-family: "McClatchy Slab";
   font-weight: bold;
   src: url(./fonts/McClatchySlab-Semibold.woff) format('woff');
 }
@@ -60,15 +60,15 @@ a {
 }
 
 .slab {
-  font-family: "McClatchySlab", Georgia, serif;
+  font-family: "McClatchy Slab", Georgia, serif;
 }
 
 .sans {
-  font-family: "McClatchySans", Helvetica, sans-serif;
+  font-family: "McClatchy Sans", Helvetica, sans-serif;
 }
 
 .sans-cond {
-  font-family: "McClatchySansCond", "Helvetica Condensed", Helvetica, sans-serif;
+  font-family: "McClatchy Sans Cond", "Helvetica Condensed", Helvetica, sans-serif;
 }
 
 .mono {
@@ -114,7 +114,7 @@ a {
   color: #0093d0;
   font-size: 22px;
   font-weight: bold;
-  font-family: "McClatchySansCond", "Helvetica Condensed", Helvetica, sans-serif;
+  font-family: "McClatchy Sans Cond", "Helvetica Condensed", Helvetica, sans-serif;
 }
 
 /**
@@ -129,7 +129,7 @@ a {
   box-sizing: border-box;
   font-size: 28px;
   font-weight: normal;
-  font-family: "McClatchySansCond", sans-serif;
+  font-family: "McClatchy Sans Cond", sans-serif;
 }
 
 .toolbar a {
