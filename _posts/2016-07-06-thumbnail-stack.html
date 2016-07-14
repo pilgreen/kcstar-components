@@ -27,7 +27,7 @@ img: img/thumbnail-stack.png
 
   <section>
     <label class="sans-cond">Copy this code</label>
-    <textarea id="code"></textarea>
+    <textarea id="code" class="pre" readonly></textarea>
   </section>
 </div>
 
@@ -74,15 +74,19 @@ img: img/thumbnail-stack.png
 
     for(var i = 0, len = items.length; i < len; i++) {
       var d = items[i];
+      var img = d.querySelector('input').value;
+      var content = d.querySelector('textarea').value
 
-      t.content.querySelector('img').src = d.querySelector('input').value;
-      t.content.querySelector('div').innerHTML = marked(d.querySelector('textarea').value);
+      t.content.querySelector('img').src = img;
+      t.content.querySelector('div').innerHTML = '\n' + marked(content) + '\n';
 
-      preview.appendChild(document.importNode(t.content, true));
-      output.push(t.innerHTML);
+      if(img && content) {
+        preview.appendChild(document.importNode(t.content, true));
+        output.push(t.innerHTML);
+      }
     }
 
-    code.value = formatCode(output.join("\n"), ["components/thumbnail-stack.html"]);
+    code.value = sanitize(output.join("\n"), ["components/thumbnail-stack.html"]);
     settings.removeAttribute('hidden');
   }
 </script>

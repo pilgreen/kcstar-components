@@ -51,16 +51,18 @@ img: img/graphic-stack.png
 
   <section>
     <label>Copy this code</label>
-    <textarea id="code"></textarea>
+    <textarea id="code" class="pre" readonly></textarea>
   </section>
 </div>
 
 <!-- Template content -->
 <template>
   <graphic-stack>
-    <img class="desktop">
-    <img class="mobile">
-    <div class="graphic-stack-content"></div>
+    <img class="desktop"></img>
+    <img class="mobile"></img>
+    <div class="graphic-stack-content">
+      <!-- empty to start -->
+    </div>
   </graphic-stack>
 </template>
 
@@ -70,6 +72,10 @@ img: img/graphic-stack.png
   var preview = document.querySelector('#preview');
   var code = document.querySelector('#code');
   var markup = document.querySelector('#markup');
+
+  marked.setOptions({
+    sanitize: true
+  });
 
   // Events
   document.querySelector('button').addEventListener('click', handleClick);
@@ -90,15 +96,14 @@ img: img/graphic-stack.png
 
     stack.setAttribute('position', v.position);
     desktop.src = v.desktop ? v.desktop : '';
-    desktop.classList.toggle('single', !v.mobile)
     mobile.src = v.mobile ? v.mobile : '';
-    mobile.classList.toggle('hidden', !v.mobile);
-    content.innerHTML = v.content;
+    desktop.classList.toggle('single', !v.mobile)
+    content.innerHTML = '\n' + v.content.trim() + '\n';
 
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
 
-    code.value = formatCode(t.innerHTML, ['components/graphic-stack.html']);
+    code.value = sanitize(t.innerHTML, ['components/graphic-stack.html']);
     settings.removeAttribute('hidden');
   }
 </script>

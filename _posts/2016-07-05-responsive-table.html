@@ -37,7 +37,7 @@ img: img/responsive-table.png
 
   <section>
     <label>Copy this code</label>
-    <textarea id="code"></textarea>
+    <textarea id="code" class="pre" readonly></textarea>
   </section>
 </div>
 
@@ -120,7 +120,8 @@ img: img/responsive-table.png
 
     data.head.forEach(function(d) {
       var th = document.createElement('th');
-      th.textContent = d;
+      var text = document.createTextNode(d);
+      th.appendChild(text);
       th.classList.toggle('number', document.querySelector(`paper-toggle-button[data-column="${d}"].number`).checked);
       th.classList.toggle('mobile', document.querySelector(`paper-toggle-button[data-column="${d}"].mobile`).checked);
       thead.appendChild(th);
@@ -130,7 +131,8 @@ img: img/responsive-table.png
       var tr = document.createElement('tr');
       d.forEach(function(t, i) {
         var td = document.createElement('td');
-        td.textContent = t;
+        var text = document.createTextNode(t);
+        td.appendChild(text);
         td.classList.toggle('number', document.querySelector(`paper-toggle-button[data-column="${data.head[i]}"].number`).checked);
         td.classList.toggle('mobile', document.querySelector(`paper-toggle-button[data-column="${data.head[i]}"].mobile`).checked);
         tr.appendChild(td);
@@ -141,6 +143,6 @@ img: img/responsive-table.png
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
 
-    code.value = formatCode(t.innerHTML, ['components/responsive-table.html']);
+    code.value = sanitize(t.innerHTML, ['components/responsive-table.html']);
   }
 </script>

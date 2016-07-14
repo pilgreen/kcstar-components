@@ -52,7 +52,7 @@ img: img/bar-chart.png
 
   <section>
     <label>Copy this code</label>
-    <textarea id="code" readonly></textarea>
+    <textarea id="code" class="pre" readonly></textarea>
   </section>
 </div>
 
@@ -157,7 +157,7 @@ img: img/bar-chart.png
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
 
-    code.value = formatCode(t.innerHTML, ['components/bar-chart.html']);
+    code.value = sanitize(t.innerHTML, ['components/bar-chart.html']);
     settings.removeAttribute('hidden');
   }
 

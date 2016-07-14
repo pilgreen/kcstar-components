@@ -3,21 +3,23 @@
  * created 2016-07-05
  */
 
-function formatCode(str, comps = []) {
-  var components = ''
+function sanitize(html, comps) {
+  var comps = comps || [];
+  var arr = ['<script src="https://pilgreen.github.io/kcstar-webcomponents/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>'];
+
   comps.forEach(function(d) {
-    components += `<link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/${d}">\n`;
+    arr.push(`<link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/${d}"></link>`);
   });
 
-  var code = str.replace(/></gm, '>\n<');
+  var code = html
+    .replace(/<img.*src="".*>/g, '') // remove empty images
+    .replace(/<img (.*)>/g, '<img $1></img>') // Close image tags for Newsgate
+    .replace(/></g, '>\n<') // Table line needs to have newlines added for editing later
+    .replace(/\n\s+/g, '\n') // Move everything to the left
+    .split(/\n/); 
 
-  var full = `
-    <script src="https://pilgreen.github.io/kcstar-webcomponents/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>
-    ${components}
-    ${code}
-  `
-
-  return full.replace(/^\s+/gm, '');
+  arr = arr.concat(code);
+  return arr.join('\n');
 }
 
 /**

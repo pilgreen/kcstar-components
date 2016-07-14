@@ -124,6 +124,10 @@ button:hover {
   color: #FF5733;
 }
 
+.pre {
+  white-space: pre;
+}
+
 .spacer {
   width: 0.5rem;
 }
