@@ -12,9 +12,9 @@ function sanitize(html, comps) {
   });
 
   var code = html
+    .replace(/></g, '>\n<') // Table line needs to have newlines added for editing later
     .replace(/<img.*src="".*>/g, '') // remove empty images
     .replace(/<img (.*)>/g, '<img $1></img>') // Close image tags for Newsgate
-    .replace(/></g, '>\n<') // Table line needs to have newlines added for editing later
     .replace(/\n\s+/g, '\n') // Move everything to the left
     .split(/\n/); 
 

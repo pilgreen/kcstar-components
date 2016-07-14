@@ -78,7 +78,7 @@ img: img/thumbnail-stack.png
       var content = d.querySelector('textarea').value
 
       t.content.querySelector('img').src = img;
-      t.content.querySelector('div').innerHTML = '\n' + marked(content) + '\n';
+      t.content.querySelector('div').innerHTML = marked(content);
 
       if(img && content) {
         preview.appendChild(document.importNode(t.content, true));

@@ -98,7 +98,7 @@ img: img/graphic-stack.png
     desktop.src = v.desktop ? v.desktop : '';
     mobile.src = v.mobile ? v.mobile : '';
     desktop.classList.toggle('single', !v.mobile)
-    content.innerHTML = '\n' + v.content.trim() + '\n';
+    content.innerHTML = v.content.trim();
 
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
