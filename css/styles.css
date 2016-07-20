@@ -65,10 +65,11 @@ section .title {
   color: #999;
 }
 
-label {
+label, paper-toggle-button {
   display: block;
   margin-top: 1rem;
   font-family: "McClatchy Sans Cond", "Helvetica Condensed", sans-serif;
+  cursor: pointer;
 }
 
 label + label {
@@ -147,10 +148,6 @@ iron-selector .button:not(.iron-selected) {
 	content: " ";
 	clear: both;
 	height: 0;
-}
-
-paper-toggle-button {
-  cursor: pointer;
 }
 
 .item + .item {

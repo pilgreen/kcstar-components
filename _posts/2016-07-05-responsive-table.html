@@ -27,6 +27,9 @@ img: img/responsive-table.png
     <div id="headers"></div>
 
     <h3 class="title">Options</h3>
+    <label>Lead in <small><a href="markdown-preview/" target="_blank">markdown enabled</a></small></label>
+    <textarea name="lead"></textarea>
+
     <paper-toggle-button id="zebra" class="sans-cond">Zebra striping</paper-toggle-button>
   </section>
 
@@ -52,6 +55,7 @@ img: img/responsive-table.png
 </template>
 
 <template data-role="preview">
+  <div class="lead-in"></div>
   <table is="responsive-table">
     <thead><tr></tr></thead>
     <tbody></tbody>
@@ -68,7 +72,6 @@ img: img/responsive-table.png
 
   // Events
   document.querySelector('#start').addEventListener('click', handleClick);
-  window.addEventListener('iron-change', redraw);
 
   function handleClick() {
     var raw = document.querySelector('#rawdata').value;
@@ -105,10 +108,15 @@ img: img/responsive-table.png
 
     settings.removeAttribute('hidden');
     redraw();
+
+    // New Events
+    document.querySelector('textarea[name="lead"]').addEventListener('input', redraw);
+    document.addEventListener('iron-change', redraw);
   }
 
   function redraw() {
     var t = document.querySelector('template[data-role="preview"]');
+    var leadIn = t.content.querySelector('.lead-in');
     var table = t.content.querySelector('table');
     var thead = t.content.querySelector('thead tr');
     var tbody = t.content.querySelector('tbody');
@@ -117,6 +125,8 @@ img: img/responsive-table.png
 
     thead.innerHTML = '';
     tbody.innerHTML = '';
+
+    leadIn.innerHTML = marked(document.querySelector('textarea[name="lead"]').value);
 
     data.head.forEach(function(d) {
       var th = document.createElement('th');
