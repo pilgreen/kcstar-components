@@ -5,7 +5,6 @@ created 2016-07-07
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="d3-import.html">
 
 <dom-module id="bar-chart">
   <template>
@@ -103,15 +102,18 @@ created 2016-07-07
     },
 
     parseTableData: function(data) {
-      var values = data.map(function(d) {
-        return this.getNumber(d.value);
-      }.bind(this));
+      var _this = this;
 
-      this._scale = d3.scaleLinear().range([10, 75]).domain([0, d3.max(values)]);
+      var numbers = data.map(function(d) {
+        return _this.getNumber(d.value);
+      });
+
+      var scale = _this.scale({ range: [10, 75], domain: [0, Math.max.apply(null, numbers)] });
+
       this.set('_data', data.map(function(d) {
-        d.width = this._scale(this.getNumber(d.value));
+        d.width = scale(_this.getNumber(d.value));
         return d;
-      }.bind(this)));
+      }));
     },
 
     getNumber: function(value) {
@@ -123,6 +125,17 @@ created 2016-07-07
           return match ? Number(match.join('')) : NaN;
         default:
           return NaN;
+      }
+    },
+
+    scale: function(opts) {
+      var istart = opts.domain[0],
+          istop  = opts.domain[1],
+          ostart = opts.range[0],
+          ostop  = opts.range[1];
+
+      return function scale(value) {
+        return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
       }
     }
   });
