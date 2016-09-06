@@ -5,7 +5,7 @@
 
 function sanitize(html, comps) {
   var comps = comps || [];
-  var arr = ['<script src="https://pilgreen.github.io/kcstar-webcomponents/js/kcstar-webcomponents.js"></script>'];
+  var arr = ['<script src="https://pilgreen.github.io/kcstar-webcomponents/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>'];
 
   comps.forEach(function(d) {
     arr.push(`<link rel="import" href="https://pilgreen.github.io/kcstar-webcomponents/${d}"></link>`);
