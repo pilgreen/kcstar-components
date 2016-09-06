@@ -8,7 +8,6 @@ img: img/graphic-stack.png
 ---
 
 <link rel="import" href="bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="components/graphic-stack.html">
 
 <style>
   #markup {
@@ -103,7 +102,7 @@ img: img/graphic-stack.png
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
 
-    code.value = sanitize(t.innerHTML, ['components/graphic-stack.html']);
+    code.value = sanitize(t.innerHTML);
     settings.removeAttribute('hidden');
   }
 </script>

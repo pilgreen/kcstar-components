@@ -7,8 +7,6 @@ excerpt: This element shows a series of images stack on top of each other.
 img: img/thumbnail-stack.png
 ---
 
-<link rel="import" href="components/thumbnail-stack.html">
-
 <section>
   <div id="items"></div>
 </section>
@@ -86,7 +84,7 @@ img: img/thumbnail-stack.png
       }
     }
 
-    code.value = sanitize(output.join("\n"), ["components/thumbnail-stack.html"]);
+    code.value = sanitize(output.join("\n"));
     settings.removeAttribute('hidden');
   }
 </script>

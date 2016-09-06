@@ -7,7 +7,6 @@ excerpt: This element shows data copied from a Google Spreadsheet and has a few 
 img: img/responsive-table.png
 ---
 
-<link rel="import" href="components/responsive-table.html">
 <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
 
 <p>Paste data from a Google Spreadsheet into the box below. Please include a header row.</p>
@@ -153,6 +152,6 @@ img: img/responsive-table.png
     preview.innerHTML = '';
     preview.appendChild(document.importNode(t.content, true));
 
-    code.value = sanitize(t.innerHTML, ['components/responsive-table.html']);
+    code.value = sanitize(t.innerHTML);
   }
 </script>
